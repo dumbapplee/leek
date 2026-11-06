@@ -3,7 +3,7 @@
 Take-home project: Size-Level Availability Processor (Node.js, TypeScript strict ESM, Express, better-sqlite3, Vitest).
 
 ## Sources of truth
-1. `MOCK-ENVIRONMENT.md` and `Take-Home Exercise_ Size-Level Availability Processor.pdf` (the assignment).
+1. `MOCK-ENVIRONMENT.md` and `Take-Home Exercise_ Size-Level Availability Processor.md` (the assignment).
 2. `plan/wave-NN-*/AGENT.md` (the wave brief, tasks, acceptance, fixed decisions).
 3. `plan/OVERVIEW.pdf`.
 
