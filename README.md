@@ -88,3 +88,7 @@ Let N be the number of context objects for the country and M the number of uploa
 - On restart, `RUNNING` jobs resume after their last recorded line. A row whose version was committed but whose row record was not written before a crash comes back as skipped (stale). The data is correct; only that line's entry in the job report is wrong.
 - Outbox publishing is at-least-once and keeps per-key order. A row that keeps failing blocks the rows behind it for its key until it reaches `OUTBOX_MAX_ATTEMPTS`, with backoff capped at `RETRY_MAX_MS`. A dead-lettered row is not replayed by the processor; its key then continues, so that one event is lost from order.
 - The local sink's fault-injection IDs (`fault-429`, `fault-503`) are not produced by the deterministic event id, so sink fault triggers do not apply to this service. The 429 and 503 sink paths are covered by unit tests against a fake sink.
+
+## Agent team
+
+The project was built by a team of five AI agents (supervisor, product owner, software engineer, QA engineer and manager) working in nine waves. Each task goes through requirements, tests first, implementation, verification and QA review. The agents pass work to each other through files in `work/`. See [AGENT-TEAM.pdf](AGENT-TEAM.pdf) for the roles, the task cycle and the wave plan.

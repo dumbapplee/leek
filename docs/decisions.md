@@ -41,3 +41,9 @@ The classification reads the error fields that the HTTP clients set (`status`, `
 - **Sink fault triggers are not honoured.** The mock picks its fault from the `eventId` (`fault-429`, `fault-503`), and the deterministic `eventId` never produces those values. The 429 and 503 sink paths are covered by unit tests against a fake sink instead.
 - **Dev routes** are on unless `NODE_ENV=production`, so the local flow works without extra configuration.
 
+## Country code validation
+
+- **Scope is the mock data.** Every `countryCode` in `wiremock/mappings/*.json` and `wiremock/__files/` is `PT`. The validator accepts what the mocks use and any other code that is on the ISO 3166-1 alpha-2 list in `src/domain/countryCodes.ts`.
+- **Case-sensitive.** `pt` is rejected, not normalised to `PT`. The assignment asks for ISO alpha-2 codes, which are uppercase, so input is not rewritten.
+- **`XK` (Kosovo) is excluded.** It is a user-assigned code, not part of ISO 3166-1, so it is rejected like any other non-ISO code.
+
