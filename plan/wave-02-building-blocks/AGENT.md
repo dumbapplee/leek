@@ -47,7 +47,7 @@ UPDATE todos SET status = 'in_progress' WHERE id IN ('input-validation', 'retry-
 ## Tasks
 ### input-validation: Implementing input validation
 - **Depends on:** scaffold-project
-- **What to do:** Implement pure validation functions with no I/O. validateSellerInventoryChanged checks required fields, countryCode as two uppercase letters, availableQuantity as an integer of at least 0 and sourceVersion as an integer. validateCsvHeader enforces the exact header order. validateCsvRow returns errors with the line number. Functions return result objects and never throw.
+- **What to do:** Implement pure validation functions with no I/O. validateSellerInventoryChanged checks required fields, countryCode as ISO 3166-1 alpha-2 (two uppercase letters, assigned codes only; see the assignment), availableQuantity as an integer of at least 0 and sourceVersion as an integer. validateCsvHeader enforces the exact header order. validateCsvRow returns errors with the line number. Functions return result objects and never throw.
 - **Files:** `src/domain/validation.ts`, `test/validation.test.ts`
 - **Acceptance:**
   - [ ] Field-level errors include the field name and a reason.

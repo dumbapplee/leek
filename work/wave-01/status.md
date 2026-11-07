@@ -67,3 +67,34 @@
 ### Closure verdict
 
 All five concerns and the main.ts binding are closed or accepted. Wave 01 is not ready to close until (a) and (b) are decided. (c) is minor and does not block closure if Sam accepts it.
+
+## Final closure check
+
+**Date:** 2026-11-06. **Read scope:** status.md; qa.md lines 1-5, "Test run before implementation" and "Decisions (Sam)"; requirements.md R7; reasoning.md "hand-off"; the Take-Home assignment .md; AGENT.md. No code, build or test run.
+
+**Overall: Open concerns: (a) acceptance not recorded, (c) stale status line. Both are text-only. Wave 01 is ready to close once they are fixed.**
+
+### Assignment and AGENT check
+
+| Item | Assignment | Wave 1 / AGENT | Result |
+|---|---|---|---|
+| GET /health | Service health not defined. Only WireMock `/health` (localhost:8080) is named | GET /health is the only route (R8, Decision 7) | No conflict |
+| PORT default 3000 | Examples use 5000 and say to replace it with your service port | PORT=3000 | No conflict (example only) |
+| Base URLs | WireMock at `http://localhost:8080` | `http://127.0.0.1:8080` (AGENT, R6) | No conflict (same port; AGENT governs) |
+| COUNTRY_CODE default PT | countryCode is ISO alpha-2; fixtures are PT | PT, not validated (Decision 4) | No conflict |
+| Retries, CONCURRENCY, CHUNK_SIZE, LEASE_TTL, DB_PATH | Not specified | AGENT fixed decisions | No conflict |
+| npm scripts | Not specified | AGENT Tasks | No conflict |
+
+**Assignment conflict: none.**
+
+Recorded deviation, not a new conflict: AGENT DoD says "No URL, port or secret is hard-coded outside `src/config.ts`". Decision 3 in qa.md limits AC8 to production code and exempts loopback literals in test files. Keep this exemption in the wave review record.
+
+### Status of (a), (b), (c)
+
+- **(a) Not closed on record.** qa.md "Test run before implementation" says no red run was captured and gives the reason. It does not record Sam's acceptance or call the gap a process deviation. The ordering rule (tests written before `src/`) is met per that section. Action: Tom adds the accepted deviation, with Sam's name and date, to that section.
+- **(b) Closed.** qa.md "Decisions (Sam)" answers open questions 1-6. requirements.md R7 now states "PORT must also be at most 65535".
+- **(c) Partly closed.** qa.md line 3 verdict reads "PASS (review 2)". The same line still says "step 2 (tests first)... Implementation not started." Action: Tom replaces that sentence. The wiremock count of 18 is not checked here (outside the read scope).
+
+### Closure verdict
+
+Open concerns: (a) and (c). Wave 01 is ready to close when Tom records Sam's acceptance under "Test run before implementation" and fixes line 3 of qa.md.

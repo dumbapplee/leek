@@ -1,6 +1,6 @@
 ## scaffold-project
 
-**Status:** step 2 (tests first). Test plan written. Implementation not started. Verdict: PASS (review 2).
+**Status:** closed. Verdict: PASS (review 2). Process deviation accepted by Sam: no red run captured before implementation (see "Test run before implementation").
 
 **Sources:** requirements.md (R = requirement, AC = acceptance criterion, SUP = supervisor decision for open questions).
 
@@ -51,6 +51,7 @@ Edge cases from requirements: `0`, `-1`, `1.5`, `abc`, `3000abc` all covered. Un
 
 No red run was captured: the tests were not executed before `src/` existed, so the expected import failures were not observed.
 Reason: `package.json`, `src/` and `node_modules` did not exist yet, so Vitest could not start.
+Sam decision: accepted as a process deviation. Tests were written before src/ existed; the ordering rule is met.
 
 ### Open questions for Poppy and Sam
 

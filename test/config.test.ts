@@ -2,21 +2,23 @@ import { describe, expect, it } from 'vitest';
 import { type Config, loadConfig } from '../src/config.js';
 
 const defaults: Config = {
-  countryCode: 'PT',
   port: 3000,
   productContextBaseUrl: 'http://127.0.0.1:8080',
   availabilityBaseUrl: 'http://127.0.0.1:8080',
+  eventSinkBaseUrl: 'http://127.0.0.1:8080',
   dbPath: './data/processor.db',
   concurrency: 8,
   chunkSize: 500,
   retryMaxAttempts: 5,
   retryBaseMs: 200,
   retryMaxMs: 5000,
+  outboxMaxAttempts: 10,
   leaseTtlMs: 30000,
+  httpTimeoutMs: 5000,
+  enableDevRoutes: true,
 };
 
 const variableFields: Array<[string, keyof Config]> = [
-  ['COUNTRY_CODE', 'countryCode'],
   ['PORT', 'port'],
   ['PRODUCT_CONTEXT_BASE_URL', 'productContextBaseUrl'],
   ['AVAILABILITY_BASE_URL', 'availabilityBaseUrl'],
@@ -26,7 +28,9 @@ const variableFields: Array<[string, keyof Config]> = [
   ['RETRY_MAX_ATTEMPTS', 'retryMaxAttempts'],
   ['RETRY_BASE_MS', 'retryBaseMs'],
   ['RETRY_MAX_MS', 'retryMaxMs'],
+  ['OUTBOX_MAX_ATTEMPTS', 'outboxMaxAttempts'],
   ['LEASE_TTL_MS', 'leaseTtlMs'],
+  ['HTTP_TIMEOUT_MS', 'httpTimeoutMs'],
 ];
 
 const numericVariables = [
@@ -36,11 +40,12 @@ const numericVariables = [
   'RETRY_MAX_ATTEMPTS',
   'RETRY_BASE_MS',
   'RETRY_MAX_MS',
+  'OUTBOX_MAX_ATTEMPTS',
   'LEASE_TTL_MS',
+  'HTTP_TIMEOUT_MS',
 ];
 
 const overrides: Array<[string, keyof Config, string, string | number]> = [
-  ['COUNTRY_CODE', 'countryCode', 'ES', 'ES'],
   ['PORT', 'port', '8081', 8081],
   ['PRODUCT_CONTEXT_BASE_URL', 'productContextBaseUrl', 'http://127.0.0.1:9001', 'http://127.0.0.1:9001'],
   ['AVAILABILITY_BASE_URL', 'availabilityBaseUrl', 'http://127.0.0.1:9002', 'http://127.0.0.1:9002'],
@@ -50,7 +55,9 @@ const overrides: Array<[string, keyof Config, string, string | number]> = [
   ['RETRY_MAX_ATTEMPTS', 'retryMaxAttempts', '3', 3],
   ['RETRY_BASE_MS', 'retryBaseMs', '100', 100],
   ['RETRY_MAX_MS', 'retryMaxMs', '2000', 2000],
+  ['OUTBOX_MAX_ATTEMPTS', 'outboxMaxAttempts', '4', 4],
   ['LEASE_TTL_MS', 'leaseTtlMs', '60000', 60000],
+  ['HTTP_TIMEOUT_MS', 'httpTimeoutMs', '1500', 1500],
 ];
 
 const malformedNumbers = ['-1', '1.5', 'abc', '3000abc', ' 8', '8 ', '+8', '1e3'];
